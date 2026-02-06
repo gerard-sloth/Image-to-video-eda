@@ -1,0 +1,5 @@
+ipykernel>=6.31.0
+jupyter>=1.1.1
+pandas>=3.0.0
+pydantic-settings>=2.11.0
+pymongo>=4.16.0
