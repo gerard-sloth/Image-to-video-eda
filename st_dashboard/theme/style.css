@@ -1,0 +1,22 @@
+:root {
+  --accent: #2f7fbf;
+  --muted: #f4f6f9;
+}
+
+h1, h2, h3 {
+  letter-spacing: 0.2px;
+}
+
+section[data-testid="stSidebar"] {
+  background: #fafbfc;
+}
+
+.stPlotlyChart, .stPyplot, .stImage {
+  margin-bottom: 1rem;
+}
+
+div[data-testid="stMetric"] {
+  background: var(--muted);
+  padding: 0.75rem;
+  border-radius: 8px;
+}
