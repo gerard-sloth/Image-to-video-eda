@@ -6,9 +6,11 @@ Requires-Python: >=3.13
 Description-Content-Type: text/markdown
 Requires-Dist: ipykernel>=6.31.0
 Requires-Dist: jupyter>=1.1.1
+Requires-Dist: matplotlib>=3.10.8
 Requires-Dist: pandas>=3.0.0
 Requires-Dist: pydantic-settings>=2.11.0
 Requires-Dist: pymongo>=4.16.0
+Requires-Dist: seaborn>=0.13.2
 
 # Image-to-video-eda
 Image to video analysis
