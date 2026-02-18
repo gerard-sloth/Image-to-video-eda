@@ -25,6 +25,7 @@ if logo_path.exists():
     st.image(str(logo_path), use_container_width=False)
 
 st.header("Overview")
+st.caption("High-level view of Studio Jadu usage, summarizing model requests and estimated cost trends over time.")
 
 try:
     with st.spinner("Loading data..."):
@@ -69,13 +70,16 @@ if filtered.empty:
     st.stop()
 
 st.subheader("Requests over time")
+st.caption("Weekly count of jobs created, grouped by task type.")
 fig_requests = requests_over_time(filtered, group_col="model_type_agg", percent=percent)
 st.plotly_chart(fig_requests, use_container_width=True)
 
 st.subheader("Cost over time")
+st.caption("Estimated weekly spend (USD) for generated jobs, grouped by task type.")
 fig_cost = cost_over_time(filtered, group_col="model_type_agg", percent=percent)
 st.plotly_chart(fig_cost, use_container_width=True)
 
 st.subheader("Jobs and total cost by model type")
+st.caption("Side-by-side comparison of total job volume and total cost by task type.")
 fig_bar = jobs_and_cost_bar(filtered, group_col="model_type_agg")
 st.plotly_chart(fig_bar, use_container_width=True)

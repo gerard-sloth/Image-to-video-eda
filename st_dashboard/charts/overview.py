@@ -79,4 +79,6 @@ def jobs_and_cost_bar(df: pd.DataFrame, group_col: str):
         yaxis_title="Value",
         margin=dict(l=40, r=20, t=50, b=80),
     )
+    fig.update_xaxes(tickfont=dict(size=14))
+    fig.update_yaxes(tickfont=dict(size=14), title_font=dict(size=14))
     return fig

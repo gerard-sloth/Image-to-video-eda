@@ -27,6 +27,7 @@ if logo_path.exists():
     st.image(str(logo_path), use_container_width=False)
 
 st.header("Task Breakdown")
+st.caption("Deep dive into a single task type, comparing model usage, cost, and quality signals.")
 
 try:
     with st.spinner("Loading data..."):
@@ -72,10 +73,12 @@ if filtered.empty:
     st.stop()
 
 st.subheader(f"Generation usage over time ({selected_type})")
+st.caption("Weekly job volume for top models within the selected task.")
 fig_usage = usage_over_time(filtered, top_n=top_n, percent=percent)
 st.plotly_chart(fig_usage, use_container_width=True)
 
 st.subheader(f"Cost over time ({selected_type})")
+st.caption("Weekly estimated cost for top models within the selected task.")
 fig_cost = cost_over_time(filtered, top_n=top_n, percent=percent)
 st.plotly_chart(fig_cost, use_container_width=True)
 
@@ -84,6 +87,7 @@ model_title_counts = filtered["model_title_extracted"].value_counts().head(top_n
 top_titles = model_title_counts.index.tolist()
 
 st.subheader("Quality")
+st.caption("Quality score distribution and download rates for the selected task.")
 quality_available = filtered["quality_score"].notna().any()
 if not quality_available:
     st.info("No quality scores available for this task type.")
@@ -110,6 +114,7 @@ else:
         st.info("No download rate data.")
 
 st.subheader("Cost")
+st.caption("Average model cost and weekly cost trends for the selected task.")
 col_c1, col_c2 = st.columns(2)
 fig_avg_cost = avg_cost_bar(filtered, top_titles)
 with col_c1:
@@ -126,6 +131,7 @@ with col_c2:
         st.info("No weekly cost data.")
 
 st.subheader("Quality vs Cost")
+st.caption("Relationship between quality outcomes and average cost per model.")
 fig_scatter = scatter_quality_cost(filtered, top_titles)
 if fig_scatter is not None:
     st.pyplot(fig_scatter)

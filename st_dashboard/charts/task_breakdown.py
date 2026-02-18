@@ -4,6 +4,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import seaborn as sns
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
 
 from st_dashboard.data.transforms import build_family_palette
 
@@ -222,6 +223,7 @@ def scatter_quality_cost(df_sub, top_titles):
     fig, axes = plt.subplots(1, 2, figsize=(12, 4), sharey=True)
     ax1, ax2 = axes
 
+    legend_handles = {}
     for _, row in summary.iterrows():
         color = palette_map.get(row["model_title_extracted"], "#4E79A7")
         size = max(40, np.sqrt(row["n"]) * 20)
@@ -243,6 +245,19 @@ def scatter_quality_cost(df_sub, top_titles):
             edgecolors="white",
             linewidths=0.5,
         )
+        label = row["model_title_extracted"]
+        if label not in legend_handles:
+            legend_handles[label] = Line2D(
+                [0],
+                [0],
+                marker="o",
+                color="none",
+                markerfacecolor=color,
+                markeredgecolor="white",
+                markeredgewidth=0.5,
+                markersize=8,
+                label=label,
+            )
 
     ax1.set_title("Avg Score vs Avg Cost")
     ax1.set_xlabel("Average Quality Score")
@@ -253,5 +268,13 @@ def scatter_quality_cost(df_sub, top_titles):
     ax2.set_xlabel("Download Rate")
     ax2.grid(alpha=0.4)
 
+    fig.legend(
+        handles=list(legend_handles.values()),
+        loc="center left",
+        bbox_to_anchor=(1.02, 0.5),
+        title="Model",
+        frameon=False,
+    )
+    fig.subplots_adjust(right=0.82)
     plt.tight_layout()
     return fig
