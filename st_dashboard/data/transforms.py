@@ -84,6 +84,11 @@ def extract_model_title(row: pd.Series) -> str:
         if provider == "REPLICATE":
             model_id = row.get("modelConfig.id")
             return _normalize_replicate_id(model_id, model_type) or "unknown_replicate_model"
+        
+    if  model_type == "t2i":
+        if provider == "OPENAI" or provider == "REPLICATE":
+            model_id = row.get("modelConfig.id")
+            return _normalize_replicate_id(model_id, model_type) or "unknown_model"
 
     return row.get("modelConfig.modelTitle")
 
